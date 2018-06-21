@@ -5,9 +5,11 @@
 
 %% get mean values for each state
 
-addpath(genpath('/Users/kosciessa/BrainHack/HMM_complete/T_tools/HMM-MAR-master/'))
+pn.root = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/';
 
-load('/Users/kosciessa/BrainHack/HMM_complete/B_data/A_HMMoutput.mat')
+addpath(genpath([pn.root, 'T_tools/HMM-MAR-master/']))
+
+load([pn.root, 'B_data/A_HMMoutput_allSubs.mat'])
 
 for k = 1:12
     meanState(k,:) = getMean(hmm,k);
@@ -17,9 +19,9 @@ figure; imagesc(meanState)
 
 %% load parcellated image, replace with mean values for each state
 
-pn.dataOut = '/Users/kosciessa/BrainHack/HMM_complete/B_data/B_stateNiftys/'; mkdir(pn.dataOut);
+pn.dataOut = [pn.root, 'B_data/B_stateNiftys/']; mkdir(pn.dataOut);
 
-BrainPacel = niftiread("/Users/kosciessa/Downloads/dynamicnetworks-master/basc_2mm_scale064.nii.gz");
+BrainPacel = niftiread('/Users/kosciessa/OHBM18/A_BrainHack/dynamicnetworks-master/basc_2mm_scale064.nii.gz');
 
 for k = 1:12
     StateValues = zeros(size(BrainPacel));
