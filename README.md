@@ -29,4 +29,4 @@ Julian Kosciessa
 To Do
 --
 - nilearn/plotting script to plot the HMM states
-- sklearn script to perform community detection of the intersubject FO correlation matrix (from G_LouvainCommunity.ipynb) and output metastate time-series for each subject -> Fractional 
+- sklearn script to perform community detection of the intersubject FO correlation matrix (from G_LouvainCommunity.ipynb) and output metastate time-series for each subject -> Fractional Occupancy, switching rate
