@@ -1,7 +1,7 @@
 Interpreting Dynamic Connectivity by comparing methods 
 --
 
-The goal of this project is to opensource ongoing efforts to estimate and characterize various aspects of dynamic brain connectivity analysis. As a starting point, we will provide (1a) a set of functions that use scikit-learn, nilearn, bct (+numpy, scipy, nistats,...) that can be used to estimate dynamic connectivity states with a set of connectivity metrics, sliding windows and clustering algorithms, (1b) as well as decomposition methods (e.g. ICA, dictionary learning) , (2) simple methods to calculate null statistical models using bootstrapping procedures, (3) dynamic graph theory metrics, and (4) basic visualizations. We encourage interested researchers to join us in order to either help building the examples, or contribute with new methods, or test our methods on their own data.
+The goal of this project is to opensource ongoing efforts to estimate and characterize various aspects of dynamic brain connectivity analysis. As a starting point, we will provide (1a) a set of functions that use scikit-learn, nilearn, bct (+numpy, scipy, nistats,...) that can be used to estimate dynamic connectivity states with a set of connectivity metrics, sliding windows and clustering algorithms, (1b) as well as decomposition methods (e.g. ICA, dictionary learning) (1c) model-based methods (HMM from Vidaurre et al. 2017 PNAS), (2) simple methods to calculate null statistical models using bootstrapping procedures, (3) dynamic graph theory metrics, and (4)  visualizations using Spectral Embedding. We encourage interested researchers to join us in order to either help building the examples, or contribute with new methods, or test our methods on their own data.
 
 Dependencies
 --
