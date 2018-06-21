@@ -1,7 +1,9 @@
 % Create a plot for the presentation
-pn.dataDir = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/B_data/';
 
-load([pn.dataDir, 'A_HMMoutput.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
+pn.root = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/'; 
+pn.dataDir = [pn.root, 'B_data/'];
+
+load([pn.dataDir, 'A_HMMoutput_allSubs.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
 
 %% plot results
 
@@ -11,13 +13,13 @@ hold on;
 for indSub = 0:4:40
     line([0 12.5], [indSub+.5 indSub+.5],  'Color','k', 'LineWidth', 2)
 end
-xlabel('Subject'); ylabel('Scan'); title('State Occupancy'); colorbar;
+xlabel('State'); ylabel('Scan'); title('State Occupancy'); colorbar;
 subplot(2,2,3); plot(SwitchingRate)
 xlabel('Scan'); ylabel('Switching Rate'); title('Switching Rate');
 subplot(2,2,4); plot(maxFO)
 xlabel('Scan'); ylabel('maximum Fractional Occupancy'); title('maximum Fractional Occupancy');
 
-pn.plotFolder = '/Users/kosciessa/BrainHack/C_figures/';
+pn.plotFolder = [pn.root,'C_figures/'];
 figureName = 'A_HMMoutput';
 
 saveas(h, [pn.plotFolder, figureName], 'fig');
@@ -37,7 +39,7 @@ end
 
 %% plot state maps
 
-pn.dataOut = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/B_data/B_stateNiftys/';
+pn.dataOut = [pn.root, '/B_data/B_stateNiftys/'];
 
 for k = 1:12
     BrainParcel{k} = niftiread([pn.dataOut, 'HMM_State_', num2str(k)]);
@@ -81,7 +83,7 @@ end
 colormap(gray)
 set(findall(gcf,'-property','FontSize'),'FontSize',18)
 
-pn.plotFolder = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/C_figures/';
+pn.plotFolder = [pn.root, 'C_figures/'];
 figureName = 'B_states';
 
 saveas(h, [pn.plotFolder, figureName], 'fig');

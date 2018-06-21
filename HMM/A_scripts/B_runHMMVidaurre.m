@@ -1,16 +1,16 @@
 %% prepare data
 
 % add HMM-MAR toolbox
-addpath(genpath('/Users/kosciessa/BrainHack/HMM/T_tools/HMM-MAR-master/'))
+addpath(genpath('/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/T_tools/HMM-MAR-master/'))
 
-pn.dataDir = '/Users/kosciessa/BrainHack/HMM/B_data/';
+pn.dataDir = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/B_data/';
 
-fileNames = dir([pn.dataDir, '10subjects_mat/*.mat']);
+fileNames = dir([pn.dataDir, 'allsubjs_mat/*.mat']);
 fileNames = {fileNames(:).name}';
 
 X=[]; T=[]; % data = X
 for indData = 1:numel(fileNames)
-    loadData = load([pn.dataDir, fileNames{indData}]);
+    loadData = load([pn.dataDir, 'allsubjs_mat/', fileNames{indData}]);
     X{indData,1} = zscore(loadData.ts,[],1); % time x channels (extracted regions); z-score (see Vidaurre et al., 2017 PNAS)
     T{indData,1} = [size(loadData.ts,1)]; 
 end
@@ -56,7 +56,7 @@ end
 %% run HMM model
 
 % HMM computation
-[hmm, Gamma] = hmmmar(data,T,options);
+[hmm, Gamma] = hmmmar(X,T,options);
 
 %% plot results
 
@@ -71,7 +71,7 @@ SwitchingRate =  getSwitchingRate(Gamma,T,options); % rate of switching between 
 
 %% save outputs
 
-save([pn.dataDir, 'A_HMMoutput.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
+save([pn.dataDir, 'A_HMMoutput_allSubs.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
 
 %% plot results
 
@@ -81,14 +81,14 @@ hold on;
 for indSub = 0:4:40
     line([0 12.5], [indSub+.5 indSub+.5],  'Color','k', 'LineWidth', 2)
 end
-xlabel('Subject'); ylabel('Scan'); title('State Occupancy'); colorbar;
+xlabel('State'); ylabel('Scan'); title('State Occupancy'); colorbar;
 subplot(2,2,3); plot(SwitchingRate)
 xlabel('Scan'); ylabel('Switching Rate'); title('Switching Rate');
 subplot(2,2,4); plot(maxFO)
 xlabel('Scan'); ylabel('maximum Fractional Occupancy'); title('maximum Fractional Occupancy');
 
-pn.plotFolder = '/Users/kosciessa/BrainHack/C_figures/';
-figureName = 'A_HMMoutput';
+pn.plotFolder = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/C_figures/';
+figureName = 'A_HMMoutput_allSubs';
 
 saveas(h, [pn.plotFolder, figureName], 'fig');
 saveas(h, [pn.plotFolder, figureName], 'epsc');

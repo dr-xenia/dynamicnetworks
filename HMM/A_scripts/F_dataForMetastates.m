@@ -3,7 +3,7 @@
 addpath(genpath('/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/T_tools/HMM-MAR-master/'))
 
 pn.dataDir = '/Users/kosciessa/OHBM18/A_BrainHack/HMM_complete/B_data/';
-load([pn.dataDir, 'A_HMMoutput.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
+load([pn.dataDir, 'A_HMMoutput_allSubs.mat'], 'options', 'hmm', 'Gamma', 'maxFO', 'FO', 'LifeTimes', 'Intervals', 'SwitchingRate')
 
 transitionProbabilities = getTransProbs(hmm); 
 figure; imagesc(transitionProbabilities)
